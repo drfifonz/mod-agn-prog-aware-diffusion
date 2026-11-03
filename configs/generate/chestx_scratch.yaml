@@ -1,0 +1,77 @@
+seed: 42
+output_root: data/generated/chestx/scratch
+device: auto
+precision: auto
+save_format: png
+save_individual: true
+save_grids: true
+auto_increment_output: false
+models:
+- name: No_Finding
+  model_type: gaussian_diffusion_generator
+  checkpoint_path: outputs/generators/chestx/scratch/No_Finding/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: &id001
+  - 256
+  - 256
+  model_kwargs:
+    num_timesteps: 1000
+    sampling_timesteps: 500
+    feature_maps: 64
+    dim_mults:
+    - 1
+    - 2
+    - 4
+    - 8
+    use_medicraft_settings: true
+- name: Effusion
+  model_type: gaussian_diffusion_generator
+  checkpoint_path: outputs/generators/chestx/scratch/Effusion/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    num_timesteps: 1000
+    sampling_timesteps: 500
+    feature_maps: 64
+    dim_mults:
+    - 1
+    - 2
+    - 4
+    - 8
+    use_medicraft_settings: true
+- name: Pneumonia
+  model_type: gaussian_diffusion_generator
+  checkpoint_path: outputs/generators/chestx/scratch/Pneumonia/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    num_timesteps: 1000
+    sampling_timesteps: 500
+    feature_maps: 64
+    dim_mults:
+    - 1
+    - 2
+    - 4
+    - 8
+    use_medicraft_settings: true
+- name: Pneumothorax
+  model_type: gaussian_diffusion_generator
+  checkpoint_path: outputs/generators/chestx/scratch/Pneumothorax/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    num_timesteps: 1000
+    sampling_timesteps: 500
+    feature_maps: 64
+    dim_mults:
+    - 1
+    - 2
+    - 4
+    - 8
+    use_medicraft_settings: true
+wandb:
+  enabled: false

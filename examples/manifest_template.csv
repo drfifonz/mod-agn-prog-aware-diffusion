@@ -1,0 +1,4 @@
+path,label,patient_id,split
+images/example_001.png,reference,example_patient_001,train
+images/example_002.png,reference,example_patient_002,val
+images/example_003.png,reference,example_patient_003,test

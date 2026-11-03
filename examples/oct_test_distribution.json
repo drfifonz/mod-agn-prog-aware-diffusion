@@ -1,0 +1,6 @@
+{
+  "reference": 0.7,
+  "benign": 0.15,
+  "fluid": 0.1,
+  "precancerous": 0.05
+}

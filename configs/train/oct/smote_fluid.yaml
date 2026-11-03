@@ -1,0 +1,56 @@
+seed: 42
+paths:
+  output_root: outputs/generators
+  experiment_name: oct/smote/fluid
+  init_checkpoint: null
+data:
+  dataset:
+    name: manifest
+    params:
+      manifest: manifests/oct_ns.csv
+      root: data/oct
+      classes:
+      - reference
+      - benign
+      - fluid
+      - precancerous
+      class_name: fluid
+      modality: oct
+      image_size:
+      - 256
+      - 512
+      standardize: false
+  batch_size: 16
+  num_workers: 0
+  pin_memory: true
+model:
+  name: smote_generator
+  sample_size:
+  - 256
+  - 512
+  feature_maps: 64
+  latent_dim: 128
+  smote_k_neighbors: 5
+trainer:
+  max_epochs: 1
+  max_steps: null
+  precision: auto
+  accelerator: auto
+  devices: 1
+  num_sanity_val_steps: 0
+  log_every_n_steps: 10
+validation:
+  enabled: true
+  fid_enabled: true
+  every_n_steps: null
+  every_n_epochs: 1
+  fid_num_samples: 256
+  low_vram_mode: true
+sampling:
+  every_n_steps: 10000
+  num_samples: 16
+  num_inference_steps: 500
+  grid_nrow: 4
+wandb:
+  enabled: false
+  entity: null

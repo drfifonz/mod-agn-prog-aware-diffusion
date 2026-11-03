@@ -1,0 +1,64 @@
+seed: 42
+paths:
+  output_root: outputs/generators
+  experiment_name: chestx/scratch/Pneumothorax
+  init_checkpoint: null
+data:
+  dataset:
+    name: manifest
+    params:
+      manifest: manifests/chestx_ns.csv
+      root: data/chestx
+      classes:
+      - No_Finding
+      - Effusion
+      - Pneumonia
+      - Pneumothorax
+      class_name: Pneumothorax
+      modality: chestx
+      image_size: &id001
+      - 256
+      - 256
+      standardize: false
+  batch_size: 16
+  num_workers: 0
+  pin_memory: true
+model:
+  name: gaussian_diffusion_generator
+  sample_size: *id001
+  num_timesteps: 1000
+  sampling_timesteps: 500
+  feature_maps: 64
+  dim_mults:
+  - 1
+  - 2
+  - 4
+  - 8
+  use_medicraft_settings: true
+  objective: pred_v
+  beta_schedule: sigmoid
+  ddim_sampling_eta: 0.0
+  auto_normalize: true
+trainer:
+  max_epochs: -1
+  max_steps: 100000
+  precision: auto
+  accelerator: auto
+  devices: 1
+  num_sanity_val_steps: 0
+  log_every_n_steps: 10
+validation:
+  enabled: true
+  fid_enabled: true
+  every_n_steps: 10000
+  every_n_epochs: null
+  fid_num_samples: 256
+  low_vram_mode: true
+sampling:
+  every_n_steps: 10000
+  num_samples: 16
+  num_inference_steps: 500
+  grid_nrow: 4
+wandb:
+  enabled: false
+  entity: null

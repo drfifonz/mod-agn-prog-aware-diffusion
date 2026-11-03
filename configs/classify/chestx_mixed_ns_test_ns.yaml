@@ -1,0 +1,37 @@
+seed: 42
+repeats: 10
+experiment_name: chestx_mixed_ns_test_ns
+output_root: outputs/classification
+data:
+  manifest: manifests/chestx_ns.csv
+  root: data/chestx
+  classes:
+  - No_Finding
+  - Effusion
+  - Pneumonia
+  - Pneumothorax
+  modality: chestx
+  image_size:
+  - 256
+  - 256
+  synthetic_root: data/generated/chestx/progression
+  mode: mixed
+  stratified: false
+  synthetic_per_class: 4000
+  target_distribution:
+    No_Finding: 0.7
+    Effusion: 0.15
+    Pneumonia: 0.1
+    Pneumothorax: 0.05
+  selection_seed: 42
+  batch_size: 32
+  num_workers: 0
+model:
+  pretrained: true
+  learning_rate: 0.0001
+trainer:
+  max_epochs: 15
+  precision: 32-true
+  accelerator: auto
+  devices: 1
+  patience: 5

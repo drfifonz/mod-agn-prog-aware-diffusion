@@ -1,0 +1,53 @@
+seed: 42
+output_root: data/generated/oct/gan
+device: auto
+precision: auto
+save_format: png
+save_individual: true
+save_grids: true
+auto_increment_output: false
+models:
+- name: reference
+  model_type: gan_generator
+  checkpoint_path: outputs/generators/oct/gan/reference/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: &id001
+  - 256
+  - 512
+  model_kwargs:
+    feature_maps: 64
+    latent_dim: 128
+    smote_k_neighbors: 5
+- name: benign
+  model_type: gan_generator
+  checkpoint_path: outputs/generators/oct/gan/benign/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    feature_maps: 64
+    latent_dim: 128
+    smote_k_neighbors: 5
+- name: fluid
+  model_type: gan_generator
+  checkpoint_path: outputs/generators/oct/gan/fluid/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    feature_maps: 64
+    latent_dim: 128
+    smote_k_neighbors: 5
+- name: precancerous
+  model_type: gan_generator
+  checkpoint_path: outputs/generators/oct/gan/precancerous/checkpoints/best.ckpt
+  num_images: 4000
+  batch_size: 16
+  sample_size: *id001
+  model_kwargs:
+    feature_maps: 64
+    latent_dim: 128
+    smote_k_neighbors: 5
+wandb:
+  enabled: false

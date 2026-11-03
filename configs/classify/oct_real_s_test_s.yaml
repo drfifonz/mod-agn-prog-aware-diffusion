@@ -1,0 +1,37 @@
+seed: 42
+repeats: 10
+experiment_name: oct_real_s_test_s
+output_root: outputs/classification
+data:
+  manifest: manifests/oct_s.csv
+  root: data/oct
+  classes:
+  - reference
+  - benign
+  - fluid
+  - precancerous
+  modality: oct
+  image_size:
+  - 256
+  - 512
+  synthetic_root: data/generated/oct/progression
+  mode: real
+  stratified: true
+  synthetic_per_class: 4000
+  target_distribution:
+    reference: 0.7
+    benign: 0.15
+    fluid: 0.1
+    precancerous: 0.05
+  selection_seed: 42
+  batch_size: 32
+  num_workers: 0
+model:
+  pretrained: true
+  learning_rate: 0.0001
+trainer:
+  max_epochs: 15
+  precision: 32-true
+  accelerator: auto
+  devices: 1
+  patience: 5

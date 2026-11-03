@@ -1,0 +1,6 @@
+{
+  "No_Finding": 0.7,
+  "Effusion": 0.15,
+  "Pneumonia": 0.1,
+  "Pneumothorax": 0.05
+}
